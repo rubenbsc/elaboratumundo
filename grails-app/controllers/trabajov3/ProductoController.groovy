@@ -7,7 +7,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class ProductoController {
-
+	
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
 	def viewMainImage = {
