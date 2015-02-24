@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${comentarioInstance?.fecha}">
+				<li class="fieldcontain">
+					<span id="fecha-label" class="property-label"><g:message code="comentario.fecha.label" default="Fecha" /></span>
+					
+						<span class="property-value" aria-labelledby="fecha-label"><g:formatDate date="${comentarioInstance?.fecha}" /></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${comentarioInstance?.text}">
 				<li class="fieldcontain">
 					<span id="text-label" class="property-label"><g:message code="comentario.text.label" default="Text" /></span>

@@ -9,6 +9,42 @@ import grails.transaction.Transactional
 class ProductoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def viewMainImage = {
+		def prod = Producto.get(params.id)
+		//byte[] image = g.resource(dir: 'images', file: 'image1.jpg').bytes
+		byte[] image = null
+		for (foto in prod.fotos) {
+			if (foto.position==1) {
+				image = foto.img
+			}
+		}
+		response.outputStream << image
+	}
+	
+	def subirImagen = {
+		//recuperamos el archivo en la varible archivo (fileName) es el nombre del imput file del gsp
+		def img = request.getFile('fileName')
+		// creamos el directorio en la ruta donde esta nuestra aplicacion y agragamos la carpeta
+		println "va bien"
+		def webRootDir = servletContext.getRealPath("/")
+		def imgDir = new File(webRootDir, "/imagenes")
+		imgDir.mkdirs()
+		
+		// Guardamos la imagen en el directorio
+		img.transferTo(new File( imgDir, img.originalFilename))
+		
+		// Ruta del archivo
+		String file=imgDir.toString()+ File.separator + img.originalFilename
+		
+		//agregamos el nombre del archivo a una lista en caso de querer imprimir el nombre
+		ArrayList nomArchivo=new ArrayList()
+		nomArchivo.add(archivo.originalFilename)
+		
+		//regresamos la lista a un gsp y asi cargamos un archivo al servidor
+		//render (view:'form', model:[nomArchivo:nomArchivo])
+		render "terminadooooooooooooooo"
+	}
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

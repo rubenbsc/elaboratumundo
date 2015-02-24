@@ -17,6 +17,13 @@ class Producto {
 	static hasMany = [lineas:Linea_Pedido, fotos:Imagen, comentarios:Comentario]
 	Categoria category
 	
+	
     static constraints = {
+		iva blank: true, nullable:true
+		category (blank:true, nullabale: true)
     }
+	
+	static mapping = {
+		
+	}
 }

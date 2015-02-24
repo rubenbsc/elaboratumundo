@@ -26,6 +26,8 @@
 					
 						<th><g:message code="comentario.autor.label" default="Autor" /></th>
 					
+						<g:sortableColumn property="fecha" title="${message(code: 'comentario.fecha.label', default: 'Fecha')}" />
+					
 						<g:sortableColumn property="text" title="${message(code: 'comentario.text.label', default: 'Text')}" />
 					
 					</tr>
@@ -35,6 +37,8 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${comentarioInstance.id}">${fieldValue(bean: comentarioInstance, field: "autor")}</g:link></td>
+					
+						<td><g:formatDate date="${comentarioInstance.fecha}" /></td>
 					
 						<td>${fieldValue(bean: comentarioInstance, field: "text")}</td>
 					

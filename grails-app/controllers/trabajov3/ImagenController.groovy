@@ -10,6 +10,12 @@ class ImagenController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	def viewImage = {
+			  def foto = Imagen.get( params.id )
+			  byte[] image = foto.img
+			  response.outputStream << image	
+	}
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Imagen.list(params), model:[imagenInstanceCount: Imagen.count()]

@@ -11,6 +11,15 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: comentarioInstance, field: 'fecha', 'error')} required">
+	<label for="fecha">
+		<g:message code="comentario.fecha.label" default="Fecha" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="fecha" precision="day"  value="${comentarioInstance?.fecha}"  />
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: comentarioInstance, field: 'text', 'error')} required">
 	<label for="text">
 		<g:message code="comentario.text.label" default="Text" />

@@ -7,6 +7,7 @@ class Rol_Usuario {
 	static hasMany = [usuarios:Usuario]
 
     static constraints = {
+		
     }
 	
 //	static mapping = {

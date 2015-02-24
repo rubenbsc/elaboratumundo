@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="mainGrails">
 		<g:set var="entityName" value="${message(code: 'imagen.label', default: 'Imagen')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
@@ -25,7 +25,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:imagenInstance, action:'save']" >
+			<g:form url="[resource:imagenInstance, action:'save']"  enctype="multipart/form-data">
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

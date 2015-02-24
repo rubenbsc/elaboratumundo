@@ -23,6 +23,10 @@ class Pedido {
     static constraints = {
     }
 	
+	static mapping = {
+		autoTimestamp true
+	}
+	
 //	static mapping = {
 //		
 //		table 'Pedido'

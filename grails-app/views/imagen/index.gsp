@@ -24,7 +24,11 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="imgb64" title="${message(code: 'imagen.imgb64.label', default: 'Imgb64')}" />
+						<g:sortableColumn property="img" title="${message(code: 'imagen.img.label', default: 'Img')}" />
+					
+						<g:sortableColumn property="fileType" title="${message(code: 'imagen.fileType.label', default: 'File Type')}" />
+					
+						<g:sortableColumn property="fileName" title="${message(code: 'imagen.fileName.label', default: 'File Name')}" />
 					
 						<g:sortableColumn property="position" title="${message(code: 'imagen.position.label', default: 'Position')}" />
 					
@@ -36,12 +40,14 @@
 				<g:each in="${imagenInstanceList}" status="i" var="imagenInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${imagenInstance.id}">${fieldValue(bean: imagenInstance, field: "imgb64")}</g:link></td>
+						<td><g:link action="viewImage" id="${imagenInstance.id}">${fieldValue(bean: imagenInstance, field: "fileName")}</g:link></td>
+					
+						<td>${fieldValue(bean: imagenInstance, field: "fileType")}</td>
 					
 						<td>${fieldValue(bean: imagenInstance, field: "position")}</td>
 					
 						<td>${fieldValue(bean: imagenInstance, field: "producto")}</td>
-					
+											
 					</tr>
 				</g:each>
 				</tbody>

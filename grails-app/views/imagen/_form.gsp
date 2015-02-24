@@ -2,12 +2,30 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: imagenInstance, field: 'imgb64', 'error')} required">
-	<label for="imgb64">
-		<g:message code="imagen.imgb64.label" default="Imgb64" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: imagenInstance, field: 'img', 'error')} ">
+	<label for="img">
+		<g:message code="imagen.img.label" default="Img" />
+		
 	</label>
-	<g:textField name="imgb64" required="" value="${imagenInstance?.imgb64}"/>
+	<input type="file" id="img" name="img" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: imagenInstance, field: 'fileType', 'error')} ">
+	<label for="fileType">
+		<g:message code="imagen.fileType.label" default="File Type" />
+		
+	</label>
+	<g:textField name="fileType" value="${imagenInstance?.fileType}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: imagenInstance, field: 'fileName', 'error')} ">
+	<label for="fileName">
+		<g:message code="imagen.fileName.label" default="File Name" />
+		
+	</label>
+	<g:textField name="fileName" value="${imagenInstance?.fileName}"/>
 
 </div>
 

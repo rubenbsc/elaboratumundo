@@ -1,6 +1,35 @@
 <%@ page import="trabajov3.Producto" %>
 
+<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'fotos', 'error')} ">
+	<g:uploadForm name="importUser" controller="ProductoController" action="subirImagen" method="post">
+	 
+	Seleccionar Archivo.
+	<input type="file" id="fileName" name="fileName" width="250px">
+	 
+	 
+	<input type="button" name="importar" id="importar" value="Importar" onclick="confirmar()">
+	<!-- onClick="confirmar()"En opnclick if(validarCampos()){} -->
+ 
+	</g:uploadForm>
+</div>
 
+<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'fotos', 'error')} ">
+	<label for="fotos">
+		<g:message code="producto.fotos.label" default="Fotos" />
+		
+	</label>
+	
+<ul class="one-to-many">
+<g:each in="${productoInstance?.fotos?}" var="f">
+    <li><g:link controller="imagen" action="show" id="${f.id}">${f?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="imagen" action="create" params="['producto.id': productoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'imagen.label', default: 'Imagen')])}</g:link>
+</li>
+</ul>
+
+
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'category', 'error')} required">
 	<label for="category">
@@ -29,23 +58,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'fotos', 'error')} ">
-	<label for="fotos">
-		<g:message code="producto.fotos.label" default="Fotos" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${productoInstance?.fotos?}" var="f">
-    <li><g:link controller="imagen" action="show" id="${f.id}">${f?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="imagen" action="create" params="['producto.id': productoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'imagen.label', default: 'Imagen')])}</g:link>
-</li>
-</ul>
 
-
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'iva', 'error')} required">
 	<label for="iva">

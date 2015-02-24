@@ -23,11 +23,27 @@
 			</g:if>
 			<ol class="property-list imagen">
 			
-				<g:if test="${imagenInstance?.imgb64}">
+				<g:if test="${imagenInstance?.img}">
 				<li class="fieldcontain">
-					<span id="imgb64-label" class="property-label"><g:message code="imagen.imgb64.label" default="Imgb64" /></span>
+					<span id="img-label" class="property-label"><g:message code="imagen.img.label" default="Img" /></span>
 					
-						<span class="property-value" aria-labelledby="imgb64-label"><g:fieldValue bean="${imagenInstance}" field="imgb64"/></span>
+				</li>
+				</g:if>
+			
+				<g:if test="${imagenInstance?.fileType}">
+				<li class="fieldcontain">
+					<span id="fileType-label" class="property-label"><g:message code="imagen.fileType.label" default="File Type" /></span>
+					
+						<span class="property-value" aria-labelledby="fileType-label"><g:fieldValue bean="${imagenInstance}" field="fileType"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${imagenInstance?.fileName}">
+				<li class="fieldcontain">
+					<span id="fileName-label" class="property-label"><g:message code="imagen.fileName.label" default="File Name" /></span>
+					
+						<span class="property-value" aria-labelledby="fileName-label"><g:fieldValue bean="${imagenInstance}" field="fileName"/></span>
 					
 				</li>
 				</g:if>
