@@ -1,3 +1,5 @@
+import javax.management.relation.Role;
+
 import trabajov3.*
 
 class BootStrap {
@@ -26,16 +28,27 @@ class BootStrap {
 	private createSampleData() {
 		//Datos de prueba
 		println "Creando roles..."
-		def admin = new Rol_Usuario(description:"administrador").save(failOnError: true)
-		def cliente = new Rol_Usuario(description:"clientes").save(failOnError: true)
+		def roleAdmin = new Rol(authority: 'ROL_ADMIN').save(failOnError: true)
+		def rolEmpleado = new Rol(authority: 'ROL_EMPLEADO').save(failOnError: true)
+		//def admin = new Rol_Usuario(description:"administrador").save(failOnError: true)
+		//def cliente = new Rol_Usuario(description:"clientes").save(failOnError: true)
 		//def clienteVIP = new Rol_Usuario(description:"Clientes VIP").save(failOnError:true)
 		
 		def hoy = new Date()
-		
+
 		println "Creando usuarios..."
-		def ruben = new Usuario(username:"ruben", password:Usuario.hashPassword("admin"), email:"elaboratumundo@gmail.com", firstname:"Rubén", lastname:"Burgos Santa-Cruz", rol:admin, startDate:hoy).save(failOnError: true)
-		def diego = new Usuario(username:"diego", password:Usuario.hashPassword("diego"), email:"elaboratumundo@gmail.com", firstname:"Diego", lastname:"Fernández Moya", rol:cliente, startDate:hoy).save(failOnError: true)
-		def barbara = new Usuario(username:"barbara", password:Usuario.hashPassword("cliente"), email:"elaboratumundo@gmail.com", firstname:"Bárbara", lastname:"Rodríguez Martín", rol:admin, startDate:hoy).save(failOnError: true)
+		def mollete = new Usuario(username: 'mollete', password: 'molletaso', email:'rubenbsc@gmail.com', firstname:"Rubén", lastname:"Burgos Santa-Cruz", startDate:hoy).save(failOnError: true)
+		//def ruben = new Usuario(username:"ruben", password:Usuario.hashPassword("admin"), email:"elaboratumundo@gmail.com", firstname:"Rubén", lastname:"Burgos Santa-Cruz", rol:admin, startDate:hoy).save(failOnError: true)
+		//def diego = new Usuario(username:"diego", password:Usuario.hashPassword("diego"), email:"elaboratumundo@gmail.com", firstname:"Diego", lastname:"Fernández Moya", rol:cliente, startDate:hoy).save(failOnError: true)
+		def barbara = new Usuario(username:"barbara", password: 'barbarita', email:"elaboratumundo@gmail.com", firstname:"Bárbara", lastname:"Rodríguez Martín", startDate:hoy).save(failOnError: true)
+		
+		if(!barbara.authorities.contains(rolEmpleado)){
+			UsuarioRol.create(barbara, rolEmpleado, true)
+		}
+		if(!mollete.authorities.contains(roleAdmin)){
+			UsuarioRol.create(mollete, roleAdmin, true)
+		}
+		
 		
 		println "Creando categorías ..."
 		def cat1 = new Categoria(title: "Relojes", description: "Relojes para sajdasdjasnd ssakdbaskjbd kabsdk").save(failOnError: true)
@@ -142,8 +155,9 @@ class BootStrap {
 		Linea_Pedido.executeUpdate("delete from Linea_Pedido")
 		Pedido.executeUpdate("delete from Pedido")
 		Producto.executeUpdate("delete from Producto")
+		UsuarioRol.executeUpdate("delete from UsuarioRol")
 		Usuario.executeUpdate("delete from Usuario")
-		Rol_Usuario.executeUpdate("delete from Rol_Usuario")
+		Rol.executeUpdate("delete from Rol")
 		Categoria.executeUpdate("delete from Categoria")
 		println "Borrado terminado"
 	}

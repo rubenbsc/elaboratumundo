@@ -13,7 +13,7 @@
 				<div class="col-sm-6">
 					<div class="social-icons pull-right">
 						<ul class="nav navbar-nav">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="www.facebook.com/elaboratumundo"><i class="fa fa-facebook"></i></a></li>
 							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
@@ -37,13 +37,21 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-
+							
 							<li><g:link controller="Inicio" action="index">Inicio</g:link></li>
 							<li><g:link controller="Inicio" action="index">Mi cuenta</g:link></li>
-							<li><g:link controller="Inicio" action="index">Lista de deseos</g:link></li>
+							<li><g:link controller="Inicio" action="index">"Lista de deseos"</g:link></li>
 							<li><g:link controller="Inicio" action="index">Checkout</g:link></li>
 							<li><g:link controller="Inicio" action="index">Carro de compra</g:link></li>
-							<li><g:link controller="Sesion" action="index">Login</g:link></li>
+							<sec:ifNotLoggedIn>
+							  <li><g:link controller="login" action="auth">Login</g:link></li>
+							</sec:ifNotLoggedIn>
+							<sec:ifLoggedIn>
+							  <li><sec:username /> (<g:link controller="logout" action="">Desconectar</g:link>)</li>
+							</sec:ifLoggedIn>
+							
+							
+							
 
 							<!-- <g:if test="${controllerName == "shopping"}"><li class="active"></g:if><g:else><li></g:else>
 								<g:link controller="shopping" action="index">Shopping</g:link>
@@ -53,13 +61,8 @@
 							</li>
 							<g:if test="${controllerName == "todo"}"><li class="active"></g:if><g:else><li></g:else>
 								<g:link controller="todo" action="list">To Do</g:link>
-							</li>
+							</li>-->
 
-							<li><a href="#"><i class="fa fa-user"></i> Mi cuenta</a></li>
-							<li><a href="#"><i class="fa fa-star"></i> Lista de deseos</a></li>
-							<li><a href="checkout.gsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-							<li><a href="cart.gsp"><i class="fa fa-shopping-cart"></i> Carro de compra</a></li>
-							<li><a href="login.gsp"><i class="fa fa-lock"></i> Login</a></li> -->
 						</ul>
 					</div>
 				</div>

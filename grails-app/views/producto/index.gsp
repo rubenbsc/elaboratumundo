@@ -10,14 +10,18 @@
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3">
+				<div class="col-sm-3"> <!-- Columna de la izq -->
 					<div class="left-sidebar">
 						<h2>Categorías</h2>
 						<div class="panel-group category-products">
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"></h4>
-								</div>
+								
+								<g:each in="${listaCategorias}" status="i" var="categ">
+									<div class="panel-heading">
+										<h4 class="panel-title"><a href="#">${fieldValue(bean:categ, field: "title")}</a></h4>
+									</div>
+								</g:each> <!-- Fin del bucle de categorías -->
+				
 							</div>
 						</div>
 					</div>

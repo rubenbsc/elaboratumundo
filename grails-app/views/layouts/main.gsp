@@ -12,6 +12,9 @@
 		<link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}" type="image/x-icon">
 		<link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
+  		
+  		<asset:stylesheet src="rrssb.css"/> <!-- Para iconos sociales -->
+  		
   		<asset:stylesheet src="bootstrap.min.css"/>
   		<asset:stylesheet src="font-awesome.min.css"/>
   		<asset:stylesheet src="prettyPhoto.css"/>
@@ -35,7 +38,25 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-
+		<script>
+			window.fbAsyncInit = function() {
+			  FB.init({
+			    appId      : '1402573210050212',
+			    xfbml      : true,
+			    version    : 'v2.2'
+			  });
+			};
+			
+			(function(d, s, id){
+			   var js, fjs = d.getElementsByTagName(s)[0];
+			   if (d.getElementById(id)) {return;}
+			   js = d.createElement(s); js.id = id;
+			   js.src = "//connect.facebook.net/es_ES/sdk.js";
+			   fjs.parentNode.insertBefore(js, fjs);
+			 }(document, 'script', 'facebook-jssdk'));
+		</script>
+		
+		
 		<g:render template="/layouts/header" />
 		<g:layoutBody/>
 		<g:render template="/layouts/footer" />

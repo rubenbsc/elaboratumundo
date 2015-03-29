@@ -62,6 +62,15 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
+		
+		//Instalar mañana el Spring Security Plugin!!!!!!!!!!!!!!!!! para control de roles y usuarios.
+		//Mirar los videos de los marcadores
+		compile ':spring-security-core:2.0-RC4'
+		compile ":mail:1.0.7"
+		compile ":spring-security-ui:1.0-RC2"
+		
+		
+		compile ":shopping-cart:0.8.2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
@@ -74,4 +83,19 @@ grails.project.dependency.resolution = {
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
+	
+	//Configuración de envíos de email
+	grails {
+		mail {
+			 host = "smtp.gmail.com"
+			 port = 465
+			 username = "elaboratumundo@gmail.com"
+			 password = "patan2228"
+			 props = ["mail.smtp.auth":"true",
+					  "mail.smtp.socketFactory.port":"465",
+					  "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+					  "mail.smtp.socketFactory.fallback":"false"]
+		}
+	}
+	grails.mail.default.from="elaboratumundo@gmail.com"
 }

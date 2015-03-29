@@ -3,8 +3,10 @@ package trabajov3
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
 
+@Secured(['permitAll'])
 @Transactional(readOnly = true)
 class ProductoController {
 	
@@ -47,8 +49,9 @@ class ProductoController {
 	}
 
     def index(Integer max) {
+		def categorias = Categoria.list()
         params.max = Math.min(max ?: 10, 100)
-        respond Producto.list(params), model:[productoInstanceCount: Producto.count()]
+        respond Producto.list(params), model:[productoInstanceCount: Producto.count(), listaCategorias: categorias]
     }
 
     def show(Producto productoInstance) {

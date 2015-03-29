@@ -24,7 +24,7 @@ environments {
 		dataSource {
 			//dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
 			dbCreate = "update"
-			url = "jdbc:mysql://localhost/bdtfg2?useUnicode=yes&characterEncoding=UTF-8"
+			url = "jdbc:mysql://localhost/bdtfg3?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
 			password = "alumno"
 //            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''

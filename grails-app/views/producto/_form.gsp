@@ -3,15 +3,31 @@
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'fotos', 'error')} ">
 	<g:uploadForm name="importUser" controller="ProductoController" action="subirImagen" method="post">
 	 
-	Seleccionar Archivo.
-	<input type="file" id="fileName" name="fileName" width="250px">
-	 
-	 
-	<input type="button" name="importar" id="importar" value="Importar" onclick="confirmar()">
-	<!-- onClick="confirmar()"En opnclick if(validarCampos()){} -->
+	<div class="container kv-main">
+        <form enctype="multipart/form-data">
+            <div class="form-group">
+                <input id="file-5" class="file" type="file" multiple=true data-show-upload="false" data-preview-file-type="any" data-upload-url="#">
+            </div>
+        </form>
+    </div>
  
 	</g:uploadForm>
 </div>
+
+
+
+<!-- Form Name -->
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Text Input</label>  
+  <div class="col-md-4">
+	  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
+	  <span class="help-block">help</span>  
+  </div>
+</div>
+
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'fotos', 'error')} ">
 	<label for="fotos">
@@ -33,32 +49,30 @@
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'category', 'error')} required">
 	<label for="category">
-		<g:message code="producto.category.label" default="Category" />
+		<g:message code="producto.category.label" default="Categoría" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="category" name="category.id" from="${trabajov3.Categoria.list()}" optionKey="id" required="" value="${productoInstance?.category?.id}" class="many-to-one"/>
+	<g:select id="category" name="category.id" from="${trabajov3.Categoria.list()}" optionKey="id" required="" value="${productoInstance?.category?.title}" class="many-to-one"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'comentarios', 'error')} ">
-	<label for="comentarios">
-		<g:message code="producto.comentarios.label" default="Comentarios" />
-		
-	</label>
-	<g:select name="comentarios" from="${trabajov3.Comentario.list()}" multiple="multiple" optionKey="id" size="5" value="${productoInstance?.comentarios*.id}" class="many-to-many"/>
-
-</div>
+<%--<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'comentarios', 'error')} ">--%>
+<%--	<label for="comentarios">--%>
+<%--		<g:message code="producto.comentarios.label" default="Comentarios" />--%>
+<%--		--%>
+<%--	</label>--%>
+<%--	<g:select name="comentarios" from="${trabajov3.Comentario.list()}" multiple="multiple" optionKey="id" size="5" value="${productoInstance?.comentarios*.id}" class="many-to-many"/>--%>
+<%----%>
+<%--</div>--%>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'cost', 'error')} required">
 	<label for="cost">
-		<g:message code="producto.cost.label" default="Cost" />
+		<g:message code="producto.cost.label" default="Coste:" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="cost" value="${fieldValue(bean: productoInstance, field: 'cost')}" required=""/>
 
 </div>
-
-
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'iva', 'error')} required">
 	<label for="iva">
@@ -69,23 +83,22 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'lineas', 'error')} ">
-	<label for="lineas">
-		<g:message code="producto.lineas.label" default="Lineas" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${productoInstance?.lineas?}" var="l">
-    <li><g:link controller="linea_Pedido" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="linea_Pedido" action="create" params="['producto.id': productoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'linea_Pedido.label', default: 'Linea_Pedido')])}</g:link>
-</li>
-</ul>
-
-
-</div>
+<%--<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'lineas', 'error')} ">--%>
+<%--	<label for="lineas">--%>
+<%--		<g:message code="producto.lineas.label" default="Lineas" />--%>
+<%--		--%>
+<%--	</label>--%>
+<%--	--%>
+<%--	<ul class="one-to-many">--%>
+<%--	<g:each in="${productoInstance?.lineas?}" var="l">--%>
+<%--	    <li><g:link controller="linea_Pedido" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>--%>
+<%--	</g:each>--%>
+<%--	<li class="add">--%>
+<%--	<g:link controller="linea_Pedido" action="create" params="['producto.id': productoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'linea_Pedido.label', default: 'Linea_Pedido')])}</g:link>--%>
+<%--	</li>--%>
+<%--	</ul>--%>
+<%--	--%>
+<%--</div>--%>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'little_des', 'error')} required">
 	<label for="little_des">

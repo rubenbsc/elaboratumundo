@@ -1,11 +1,16 @@
 package trabajov3
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 class Usuario {
+
+	transient springSecurityService
 
 	String username
 	String password
+	boolean enabled = true
+	boolean accountExpired
+	boolean accountLocked
+	boolean passwordExpired
+		
 	String email
 	String firstname
 	String lastname
@@ -14,35 +19,41 @@ class Usuario {
 	Date birthDate
 	
 	static hasMany = [comentarios:Comentario, pedidos:Pedido]
-	Rol_Usuario rol
 	
-    static constraints = {
-		username (size: 5..15, blank: false, unique: true)
-		password (blank: false) //No limito el tamaño porque se almacena el hash
-		email (email: true, blank: false)
-		startDate(nullable:true, blank:true)
-		endDate(nullable:true, blank:true)
-		birthDate(nullable:true, blank:true)
+	static transients = ['springSecurityService']
+
+	static constraints = {
+		username blank: false, unique: true, size: 5..15
+		password blank: false //Debo establecer una política de contraseñas
 		
-//		startDate(blank: true)
-//		endDate(blank: true)
-//		birthDate(blank:true)
-    }
-	
-	static String hashPassword(String password) {
-		DigestUtils.shaHex(password)
+		email email: true, blank: false
+		startDate nullable:true, blank:true
+		endDate nullable:true, blank:true
+		birthDate nullable:true, blank:true
+		
 	}
-	
+
 	static mapping = {
+		password column: '`password`'
 		comentarios sort:"fecha", order:"desc"
 		pedidos sort:"date", order:"desc"
 	}
-	
-	String toString() { 
-		return "User $username (id: $id)" 
+
+	Set<Rol> getAuthorities() {
+		UsuarioRol.findAllByUsuario(this).collect { it.rol }
 	}
-	
-	String getUsername() { 
-		return username 
+
+	def beforeInsert() {
+		encodePassword()
+	}
+
+	def beforeUpdate() {
+		if (isDirty('password')) {
+			encodePassword()
+		}
+	}
+
+	protected void encodePassword() {
+		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 }
