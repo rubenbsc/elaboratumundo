@@ -66,12 +66,16 @@
 									<span>${productoInstance?.unitPrice} €</span>
 									<label>Cantidad: </label>
 									<input type="text" value="1">
-									<button type="button" class="btn btn-fefault cart" href="${createLink(controller:'Pedido', action:'hola')} }" >
-										
-										<i class="fa fa-shopping-cart"></i>
-<%--										<g:actionSubmit value="Añadir al carro" action="addToCart"/>--%>
-										Añadir al carro
-									</button>
+									<g:link controller="User" action="addToCart" params="[productoId: productoInstance?.id]">
+										<button type="button" class="btn btn-fefault cart">	
+											<i class="fa fa-shopping-cart"></i>
+											Añadir al carro
+										</button>
+										<g:if test="${flash.mensajeAdd}">
+											<div class="message" style="display: block">${flash.mensajeAdd}</div>
+											<br>
+										</g:if>
+									</g:link>
 									
 									
 									<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>

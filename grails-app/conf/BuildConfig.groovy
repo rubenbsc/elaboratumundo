@@ -70,7 +70,7 @@ grails.project.dependency.resolution = {
 		compile ":spring-security-ui:1.0-RC2"
 		
 		
-		compile ":shopping-cart:0.8.2"
+		//compile ":shopping-cart:0.8.2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
@@ -89,8 +89,8 @@ grails.project.dependency.resolution = {
 		mail {
 			 host = "smtp.gmail.com"
 			 port = 465
-			 username = "elaboratumundo@gmail.com"
-			 password = "patan2228"
+			 username = "xxxxxx@gmail.com"
+			 password = "password"
 			 props = ["mail.smtp.auth":"true",
 					  "mail.smtp.socketFactory.port":"465",
 					  "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",

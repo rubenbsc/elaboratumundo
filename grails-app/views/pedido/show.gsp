@@ -4,149 +4,171 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'pedido.label', default: 'Pedido')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+<%--		<g:set var="entityName" value="${message(code: 'pedido.label', default: 'Pedido')}" />--%>
+<%--		<title><g:message code="default.show.label" args="[entityName]" /></title>--%>
 	</head>
 	<body>
-		<a href="#show-pedido" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+
 		<div id="show-pedido" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+<%--			<h1><g:message code="default.show.label" args="[entityName]" /></h1>--%>
+<%--			<g:if test="${flash.message}">--%>
+<%--			<div class="message" role="status">${flash.message}</div>--%>
+<%--			</g:if>--%>
+
+<%--			<g:form url="[resource:pedidoInstance, action:'delete']" method="DELETE">--%>
+<%--				<fieldset class="buttons">--%>
+<%--					<g:link class="edit" action="edit" resource="${pedidoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>--%>
+<%--					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />--%>
+<%--				</fieldset>--%>
+<%--			</g:form>--%>
+<%--			--%>
+			
+			<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Inicio</a></li>
+				  <li class="active">Carrito de compra</li>
+				</ol>
+			</div>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+				<div class="message" style="display: block">${flash.message}</div>
+				<br>
 			</g:if>
-			<ol class="property-list pedido">
+
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image"></td>
+							<td class="description">Artículo</td>
+							<td class="price">Precio</td>
+							<td class="quantity">Cantidad</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+
+						<g:each in="${pedidoInstance?.lineas}" status="i" var="linea_PedidoInstance">
+							<tr>
+								<td class="">								
+									<a href="">
+										<img src="${createLink(controller:'Producto', action:'viewMainImage', id:linea_PedidoInstance.product.id)}" width="100px" height="100px"></a>
+								</td>
+								<td class="cart_description">
+								<h4><a href="">${fieldValue(bean: linea_PedidoInstance, field: "product.name")}</a></h4>
+								<p>Nº Referencia: ${fieldValue(bean: linea_PedidoInstance, field: "product.id")}</p>
+								</td>
+								<td class="cart_price">
+									<p>${fieldValue(bean: linea_PedidoInstance, field: "unitPrice")} €</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<g:link controller="Pedido" action="aumentarCantidad" params="[lineaId: linea_PedidoInstance.id]" class="cart_quantity_up"> + </g:link>
+										<input class="cart_quantity_input" type="text" name="quantity" value="${fieldValue(bean: linea_PedidoInstance, field: "units")}" autocomplete="off" size="2">
+										<g:link controller="Pedido" action="disminuirCantidad" params="[lineaId: linea_PedidoInstance.id]" class="cart_quantity_down"> - </g:link>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">${fieldValue(bean: linea_PedidoInstance, field: "totalPrice")} €</p>
+								</td>
+								<td class="cart_delete">
+									<g:link controller="Pedido" action="eliminarDelCarrito" params="[lineaId: linea_PedidoInstance.id]" class="cart_quantity_delete">
+										<i class="fa fa-times"></i>
+									</g:link>
+<%--									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>--%>
+								</td>
+							</tr>
+						
+						</g:each>
+		
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
 			
-				<g:if test="${pedidoInstance?.address}">
-				<li class="fieldcontain">
-					<span id="address-label" class="property-label"><g:message code="pedido.address.label" default="Address" /></span>
-					
-						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${pedidoInstance}" field="address"/></span>
-					
-				</li>
-				</g:if>
+<%--				<h3>What would you like to do next?</h3>				
+<%--				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>--%>
+<%--				<h3>¿Qué te gustaría hacer ahora?</h3>--%>
+<%--				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>--%>
+<%--			</div>--%>
+<%--			<div class="row">--%>
+<%--				<div class="col-sm-6">--%>
+<%--					<div class="chose_area">--%>
+<%--						<ul class="user_option">--%>
+<%--							<li>--%>
+<%--								<input type="checkbox">--%>
+<%--								<label>Use Coupon Code</label>--%>
+<%--							</li>--%>
+<%--							<li>--%>
+<%--								<input type="checkbox">--%>
+<%--								<label>Use Gift Voucher</label>--%>
+<%--							</li>--%>
+<%--							<li>--%>
+<%--								<input type="checkbox">--%>
+<%--								<label>Estimate Shipping & Taxes</label>--%>
+<%--							</li>--%>
+<%--						</ul>--%>
+<%--						<ul class="user_info">--%>
+<%--							<li class="single_field">--%>
+<%--								<label>Country:</label>--%>
+<%--								<select>--%>
+<%--									<option>United States</option>--%>
+<%--									<option>Bangladesh</option>--%>
+<%--									<option>UK</option>--%>
+<%--									<option>India</option>--%>
+<%--									<option>Pakistan</option>--%>
+<%--									<option>Ucrane</option>--%>
+<%--									<option>Canada</option>--%>
+<%--									<option>Dubai</option>--%>
+<%--								</select>--%>
+<%--								--%>
+<%--							</li>--%>
+<%--							<li class="single_field">--%>
+<%--								<label>Region / State:</label>--%>
+<%--								<select>--%>
+<%--									<option>Select</option>--%>
+<%--									<option>Dhaka</option>--%>
+<%--									<option>London</option>--%>
+<%--									<option>Dillih</option>--%>
+<%--									<option>Lahore</option>--%>
+<%--									<option>Alaska</option>--%>
+<%--									<option>Canada</option>--%>
+<%--									<option>Dubai</option>--%>
+<%--								</select>--%>
+<%--							--%>
+<%--							</li>--%>
+<%--							<li class="single_field zip-field">--%>
+<%--								<label>Zip Code:</label>--%>
+<%--								<input type="text">--%>
+<%--							</li>--%>
+<%--						</ul>--%>
+<%--						<a class="btn btn-default update" href="">Get Quotes</a>--%>
+<%--						<a class="btn btn-default check_out" href="">Continue</a>--%>
+<%--					</div>--%>
+<%--				</div>--%>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Subtotal pedido<span>${pedidoInstance?.totalCost} €</span></li>							
+							<li>Gastos de envío <span>Gratis</span></li>
+							<li>Total <span>${pedidoInstance?.totalCost} €</span></li>
+							<li>IVA Incluido <span></span></li>
+						</ul>
+<%--							<a class="btn btn-default update" href="">Update</a>--%>
+							<div style="text-align: center"><a class="btn btn-default check_out" href="">Pagar</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
 			
-				<g:if test="${pedidoInstance?.city}">
-				<li class="fieldcontain">
-					<span id="city-label" class="property-label"><g:message code="pedido.city.label" default="City" /></span>
-					
-						<span class="property-value" aria-labelledby="city-label"><g:fieldValue bean="${pedidoInstance}" field="city"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.cliente}">
-				<li class="fieldcontain">
-					<span id="cliente-label" class="property-label"><g:message code="pedido.cliente.label" default="Cliente" /></span>
-					
-						<span class="property-value" aria-labelledby="cliente-label"><g:link controller="usuario" action="show" id="${pedidoInstance?.cliente?.id}">${pedidoInstance?.cliente?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.date}">
-				<li class="fieldcontain">
-					<span id="date-label" class="property-label"><g:message code="pedido.date.label" default="Date" /></span>
-					
-						<span class="property-value" aria-labelledby="date-label"><g:formatDate date="${pedidoInstance?.date}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.iva}">
-				<li class="fieldcontain">
-					<span id="iva-label" class="property-label"><g:message code="pedido.iva.label" default="Iva" /></span>
-					
-						<span class="property-value" aria-labelledby="iva-label"><g:fieldValue bean="${pedidoInstance}" field="iva"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.phone}">
-				<li class="fieldcontain">
-					<span id="phone-label" class="property-label"><g:message code="pedido.phone.label" default="Phone" /></span>
-					
-						<span class="property-value" aria-labelledby="phone-label"><g:fieldValue bean="${pedidoInstance}" field="phone"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.postalCode}">
-				<li class="fieldcontain">
-					<span id="postalCode-label" class="property-label"><g:message code="pedido.postalCode.label" default="Postal Code" /></span>
-					
-						<span class="property-value" aria-labelledby="postalCode-label"><g:fieldValue bean="${pedidoInstance}" field="postalCode"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.region}">
-				<li class="fieldcontain">
-					<span id="region-label" class="property-label"><g:message code="pedido.region.label" default="Region" /></span>
-					
-						<span class="property-value" aria-labelledby="region-label"><g:fieldValue bean="${pedidoInstance}" field="region"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.shipmentType}">
-				<li class="fieldcontain">
-					<span id="shipmentType-label" class="property-label"><g:message code="pedido.shipmentType.label" default="Shipment Type" /></span>
-					
-						<span class="property-value" aria-labelledby="shipmentType-label"><g:fieldValue bean="${pedidoInstance}" field="shipmentType"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.shippingCost}">
-				<li class="fieldcontain">
-					<span id="shippingCost-label" class="property-label"><g:message code="pedido.shippingCost.label" default="Shipping Cost" /></span>
-					
-						<span class="property-value" aria-labelledby="shippingCost-label"><g:fieldValue bean="${pedidoInstance}" field="shippingCost"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.status}">
-				<li class="fieldcontain">
-					<span id="status-label" class="property-label"><g:message code="pedido.status.label" default="Status" /></span>
-					
-						<span class="property-value" aria-labelledby="status-label"><g:link controller="estado" action="show" id="${pedidoInstance?.status?.id}">${pedidoInstance?.status?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.totalCost}">
-				<li class="fieldcontain">
-					<span id="totalCost-label" class="property-label"><g:message code="pedido.totalCost.label" default="Total Cost" /></span>
-					
-						<span class="property-value" aria-labelledby="totalCost-label"><g:fieldValue bean="${pedidoInstance}" field="totalCost"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${pedidoInstance?.totalwhithoutiva}">
-				<li class="fieldcontain">
-					<span id="totalwhithoutiva-label" class="property-label"><g:message code="pedido.totalwhithoutiva.label" default="Totalwhithoutiva" /></span>
-					
-						<span class="property-value" aria-labelledby="totalwhithoutiva-label"><g:fieldValue bean="${pedidoInstance}" field="totalwhithoutiva"/></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
-			<g:form url="[resource:pedidoInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${pedidoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
 		</div>
 	</body>
 </html>

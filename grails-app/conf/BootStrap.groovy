@@ -1,5 +1,5 @@
 import javax.management.relation.Role;
-
+import java.sql.Date;
 import trabajov3.*
 
 class BootStrap {
@@ -34,7 +34,7 @@ class BootStrap {
 		//def cliente = new Rol_Usuario(description:"clientes").save(failOnError: true)
 		//def clienteVIP = new Rol_Usuario(description:"Clientes VIP").save(failOnError:true)
 		
-		def hoy = new Date()
+		def hoy = new Date(System.currentTimeMillis())
 
 		println "Creando usuarios..."
 		def mollete = new Usuario(username: 'mollete', password: 'molletaso', email:'rubenbsc@gmail.com', firstname:"Rubén", lastname:"Burgos Santa-Cruz", startDate:hoy).save(failOnError: true)
@@ -65,11 +65,11 @@ class BootStrap {
 		
 		def producto3 = new Producto(name:"Pulsera doble hebilla (Negra)", little_des:"Descripción corta del artículo",
 			long_des: "Aqui deberá estar la descripción larga. Es posible que ocupe varias líneas. sdasfd akfhakf hao dfhasifhia hfa fhadsifha.",
-			units:5, cost:4.00, weight: 47.08, unitPrice: 6.95, valoration: 4.5, totalVotes:4, novelty:'N', category: cat2)
+			units:5, cost:4.00, weight: 47.08, unitPrice: 6.95, valoration: 4.50, totalVotes:4, novelty:'N', category: cat2)
 		
 		def producto4 = new Producto(name:"Pulsera Cuero Adornos Metal", little_des:"Descripción corta del artículo",
 			long_des: "Aqui deberá estar la descripción larga. Es posible que ocupe varias líneas. sdasfd akfhakf hao dfhasifhia hfa fhadsifha.",
-			units:3, cost:3.40, weight: 25.68, unitPrice: 5.50, valoration: 5.0, totalVotes:7, novelty:'S', category: cat2)
+			units:3, cost:3.40, weight: 25.68, unitPrice: 5.50, valoration: 5.00, totalVotes:7, novelty:'S', category: cat2)
 		
 		def producto5 = new Producto(name:"Pulsera Unisex Cuero Ajustable", little_des:"Descripción corta del artículo",
 			long_des: "Aqui deberá estar la descripción larga. Es posible que ocupe varias líneas. sdasfd akfhakf hao dfhasifhia hfa fhadsifha.",
@@ -97,7 +97,7 @@ class BootStrap {
 		def fichero11 = new File("/home/tfg/Desktop/imagenes/HPM26L-1.jpg")
 		def fichero12 = new File("/home/tfg/Desktop/imagenes/HP4558X-1.jpg")
 		def fichero13 = new File("/home/tfg/Desktop/imagenes/YW2312R-1.jpg")
-		
+		println "Paso1 "
 		def img1 = new Imagen(img: fichero1.getBytes(), fileType: "jpg", fileName: "i1", position: 1 )
 		def img2 = new Imagen(img: fichero2.getBytes(), fileType: "jpg", fileName: "i2", position: 1 )
 		def img3 = new Imagen(img: fichero3.getBytes(), fileType: "jpg", fileName: "i3", position: 1 )
@@ -112,6 +112,8 @@ class BootStrap {
 		def img12 = new Imagen(img: fichero12.getBytes(), fileType: "jpg", fileName: "i12", position: 1 )
 		def img13 = new Imagen(img: fichero13.getBytes(), fileType: "jpg", fileName: "i13", position: 1 )
 		
+		println "Paso 2"
+		
 		producto1.addToFotos(img1).save(failOnError: true)
 		producto2.addToFotos(img2).save(failOnError: true)
 		producto3.addToFotos(img3).save(failOnError: true)
@@ -125,35 +127,31 @@ class BootStrap {
 		producto5.addToFotos(img11).save(failOnError: true)
 		producto6.addToFotos(img12).save(failOnError: true)
 		producto7.addToFotos(img13).save(failOnError: true)
-			
-		//println "Creating shopping lists..."
-//			def groceriesList = new ShoppingList(name:"Groceries", description:"List of items to get from the grocery store", items:[:], owner:casey).save()
-//			def partsList = new ShoppingList(name:"Parts", description:"List of parts to get from the auto-parts store", items:[:], owner:casey).save()
-//
-//			println "Creating shopping items..."
-//			new ShoppingItem(name:"Bread", list:groceriesList, isNeeded:true).save()
-//			new ShoppingItem(name:"Milk", list:groceriesList, isNeeded:true).save()
-//			new ShoppingItem(name:"Eggs", list:groceriesList, isNeeded:true).save()
-//
-//			println "Creating reminders..."
-//			new Reminder(name:"Take out the trash", description:"Don't forget to take the trash out.", owner:casey, remindAt: new Date(113, 5, 28)).save()
-//
-//			println "Creating todo lists..."
-//			def homeList = new TodoList(name:"Home", description:"List of things to do around the house.", items:[:], owner:casey).save()
+		
+		println "Creando Status de pedidos"
+		def status1 = new Estado(description: "Carrito de compra").save(failOnError: true)
+		def status2 = new Estado(description: "Pedido pagado").save(failOnError: true)
+		
+		println "Creando Items de pedido de prueba"
+		def linea1 = new Linea_Pedido(product: producto1, units: 3, unitPrice: producto1.unitPrice, totalPrice: 3*producto1.unitPrice, totalWeight: 3*producto1.weight)
+		def linea2 = new Linea_Pedido(product: producto3, units: 2, unitPrice: producto3.unitPrice, totalPrice: 2*producto3.unitPrice, totalWeight: 2*producto3.weight)
+		
+		println "Creando pedido de prueba"
+		def pedido1 = new Pedido(status: status1, cliente: mollete, date: new Date(System.currentTimeMillis()))
+		
+		pedido1.addToLineas(linea1).save(failOnError: true)
+		pedido1.addToLineas(linea2).save(failOnError: true)
 
-//			println "Creating todo items..."
-//			new Todo(name:"Take out trash", list:homeList, isNeeded:true).save()
-//			new Todo(name:"Fix leaky pipe", list:homeList, isNeeded:true).save()
 	}
 	
 	private clearSampleData() {
 		//Mucho cuidado con el orden para que no se produzcan errores de referencias a FKs
 		println "Borrando datos ..."
 		Comentario.executeUpdate("delete from Comentario")
-		Estado.executeUpdate("delete from Estado")
 		Imagen.executeUpdate("delete from Imagen")
 		Linea_Pedido.executeUpdate("delete from Linea_Pedido")
 		Pedido.executeUpdate("delete from Pedido")
+		Estado.executeUpdate("delete from Estado")
 		Producto.executeUpdate("delete from Producto")
 		UsuarioRol.executeUpdate("delete from UsuarioRol")
 		Usuario.executeUpdate("delete from Usuario")

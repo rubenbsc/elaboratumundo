@@ -3,13 +3,16 @@ package trabajov3
 
 
 import static org.springframework.http.HttpStatus.*
+import javassist.bytecode.stackmap.BasicBlock.Catch;
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+
 class Linea_PedidoController {
-
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+	
+	
+	
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"] 
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Linea_Pedido.list(params), model:[linea_PedidoInstanceCount: Linea_Pedido.count()]

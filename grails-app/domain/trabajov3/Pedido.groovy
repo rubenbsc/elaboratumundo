@@ -21,6 +21,17 @@ class Pedido {
 	Estado status
 	
     static constraints = {
+		date nullable:true, blank:true
+		address nullable:true, blank:true
+		city nullable:true, blank:true
+		region nullable:true, blank:true
+		postalCode nullable:true, blank:true
+		phone nullable:true, blank:true
+		shippingCost nullable:true, blank:true
+		shipmentType nullable:true, blank:true
+		totalwhithoutiva nullable:true, blank:true
+		iva nullable:true, blank:true
+		totalCost nullable:true, blank:true
     }
 	
 	static mapping = {
@@ -46,4 +57,7 @@ class Pedido {
 //		totalCost column: 'total_cargo'
 //		
 //	}
+	
+	
+	
 }

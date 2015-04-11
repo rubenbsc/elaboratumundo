@@ -23,18 +23,21 @@
 			<table>
 			<thead>
 					<tr>
+						<g:sortableColumn property="ID" title="${message(code: 'pedido.id.label', default: 'ID')}" />
+						
+						<g:sortableColumn property="address" title="${message(code: 'pedido.address.label', default: 'Dirección')}" />
 					
-						<g:sortableColumn property="address" title="${message(code: 'pedido.address.label', default: 'Address')}" />
-					
-						<g:sortableColumn property="city" title="${message(code: 'pedido.city.label', default: 'City')}" />
+						<g:sortableColumn property="city" title="${message(code: 'pedido.city.label', default: 'Provincia')}" />
 					
 						<th><g:message code="pedido.cliente.label" default="Cliente" /></th>
 					
-						<g:sortableColumn property="date" title="${message(code: 'pedido.date.label', default: 'Date')}" />
+						<g:sortableColumn property="date" title="${message(code: 'pedido.date.label', default: 'Fecha')}" />
 					
 						<g:sortableColumn property="iva" title="${message(code: 'pedido.iva.label', default: 'Iva')}" />
 					
-						<g:sortableColumn property="phone" title="${message(code: 'pedido.phone.label', default: 'Phone')}" />
+						<g:sortableColumn property="phone" title="${message(code: 'pedido.phone.label', default: 'Teléfono')}" />
+						
+						<g:sortableColumn property="status" title="${message(code: 'pedido.status.label', default: 'Estado')}" />
 					
 					</tr>
 				</thead>
@@ -42,17 +45,21 @@
 				<g:each in="${pedidoInstanceList}" status="i" var="pedidoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${pedidoInstance.id}">${fieldValue(bean: pedidoInstance, field: "address")}</g:link></td>
+						<td><g:link action="show" id="${pedidoInstance.id}">${fieldValue(bean: pedidoInstance, field: "id")}</g:link></td>
+						
+						<td>${fieldValue(bean: pedidoInstance, field: "address")}</td>
 					
 						<td>${fieldValue(bean: pedidoInstance, field: "city")}</td>
 					
-						<td>${fieldValue(bean: pedidoInstance, field: "cliente")}</td>
+						<td>${fieldValue(bean: pedidoInstance, field: "cliente.username")}</td>
 					
 						<td><g:formatDate date="${pedidoInstance.date}" /></td>
 					
 						<td>${fieldValue(bean: pedidoInstance, field: "iva")}</td>
 					
 						<td>${fieldValue(bean: pedidoInstance, field: "phone")}</td>
+						
+						<td>${fieldValue(bean: pedidoInstance, field: "status.description")}</td>
 					
 					</tr>
 				</g:each>

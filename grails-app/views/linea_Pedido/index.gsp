@@ -62,5 +62,7 @@
 				<g:paginate total="${linea_PedidoInstanceCount ?: 0}" />
 			</div>
 		</div>
+		
+		
 	</body>
 </html>

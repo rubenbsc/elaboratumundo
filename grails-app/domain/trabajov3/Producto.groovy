@@ -1,6 +1,6 @@
 package trabajov3
 
-class Producto extends com.metasieve.shoppingcart.Shoppable{
+class Producto {
 	
 	String name
 	String little_des
